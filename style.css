@@ -1,0 +1,157 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fundo e centralização */
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('Lupa Sama.png'); /* como está no mesmo diretório do index */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container principal com efeito vidro */
+.container {
+  background: rgba(65, 64, 64, 0.4); /* transparente */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* compatibilidade Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* borda sutil para efeito vidro */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Título */
+h1 {
+  margin-bottom: 1.2rem;
+  color: #fff; /* mudou para branco para melhor contraste */
+  font-size: 1.5rem;
+}
+
+/* Campos e labels */
+.form-group {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: #eee; /* mais visível sobre o fundo translúcido */
+}
+
+select, input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Botões em linha */
+.acoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.acoes button {
+  flex: 1;
+}
+
+/* Botões padrão */
+button {
+  padding: 0.6rem 1.2rem;
+  background: #3f87a6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #326c86;
+}
+
+/* Botão limpar histórico */
+#btnLimpar {
+  background: #d9534f;
+}
+
+#btnLimpar:hover {
+  background: #c9302c;
+}
+
+/* Resultado */
+#resultado {
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff; /* branco para contraste */
+}
+
+/* Histórico */
+h2 {
+  margin-top: 1.2rem;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+#historico {
+  list-style: none;
+  margin-top: 0.6rem;
+  padding: 0;
+  text-align: left;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#historico li {
+  background: rgba(255, 255, 255, 0.2); /* transparente para efeito vidro nos itens */
+  margin: 0.3rem 0;
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* Media queries para telas pequenas */
+@media (max-width: 400px) {
+  h1 { font-size: 1.2rem; }
+  #resultado { font-size: 1rem; }
+  .container { padding: 1.5rem; }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #eee;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  z-index: 100;
+}
+footer a {
+  color: #838080;
+  text-decoration: none;
+}

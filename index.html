@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Fuso Horário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Conversor de Fuso Horário</h1>
+
+    <div class="form-group">
+      <label>Horário de origem:</label>
+      <input type="time" id="hora" required>
+    </div>
+
+    <div class="form-group">
+      <label>De (Fuso Horário):</label>
+      <select id="fusoDe"></select>
+    </div>
+
+    <div class="form-group">
+      <label>Para (Fuso Horário):</label>
+      <select id="fusoPara"></select>
+    </div>
+
+    <div class="acoes">
+      <button id="btnConverter">Converter</button>
+      <button id="btnLimpar">Limpar Histórico</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <h2>Histórico</h2>
+    <ul id="historico"></ul>
+  </div>
+
+  <footer>
+    © 2025 Rafael Gonçalves da Silva. Todos os direitos reservados.<br />
+    Contato: <a href="mailto:rafaelsilva543@hotmail.com">rafaelsilva543@hotmail.com</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
