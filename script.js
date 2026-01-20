@@ -34,35 +34,42 @@ const resultado = document.getElementById("resultado");
 const historico = document.getElementById("historico");
 
 fusos.forEach(fuso => {
-  const opt1 = new Option(fuso.nome, fuso.offset);
-  const opt2 = new Option(fuso.nome, fuso.offset);
-  fusoDe.appendChild(opt1);
-  fusoPara.appendChild(opt2);
+  fusoDe.appendChild(new Option(fuso.nome, fuso.offset));
+  fusoPara.appendChild(new Option(fuso.nome, fuso.offset));
 });
 
-btnConverter.addEventListener("click", () => {
-  const horaInput = document.getElementById("hora").value;
-  const offsetDe = parseFloat(fusoDe.value);
-  const offsetPara = parseFloat(fusoPara.value);
+function formatarDataBR(dataISO) {
+  const [ano, mes, dia] = dataISO.split("-");
+  return `${dia}/${mes}/${ano}`;
+}
 
-  if (!horaInput) {
-    alert("Por favor, insira um horário.");
+btnConverter.addEventListener("click", () => {
+  const dataInput = document.getElementById("data").value;
+  const horaInput = document.getElementById("hora").value;
+
+  if (!dataInput || !horaInput) {
+    alert("Por favor, selecione a data e o horário.");
     return;
   }
 
-  let [hora, minuto] = horaInput.split(":").map(Number);
-  let totalMinutos = hora * 60 + minuto;
-  let diferenca = (offsetPara - offsetDe) * 60;
+  const offsetDe = parseFloat(fusoDe.value);
+  const offsetPara = parseFloat(fusoPara.value);
 
-  totalMinutos += diferenca;
+  let dataHora = new Date(`${dataInput}T${horaInput}:00`);
+  const diferencaMs = (offsetPara - offsetDe) * 60 * 60 * 1000;
+  dataHora.setTime(dataHora.getTime() + diferencaMs);
 
-  if (totalMinutos < 0) totalMinutos += 24 * 60;
-  if (totalMinutos >= 24 * 60) totalMinutos -= 24 * 60;
+  const dataConvertidaISO = dataHora.toISOString().split("T")[0];
 
-  const horaConvertida = String(Math.floor(totalMinutos / 60)).padStart(2, "0");
-  const minutoConvertido = String(totalMinutos % 60).padStart(2, "0");
+  const dataOrigemBR = formatarDataBR(dataInput);
+  const dataConvertidaBR = formatarDataBR(dataConvertidaISO);
 
-  const resultadoTexto = `${horaInput} (${fusoDe.selectedOptions[0].text}) = ${horaConvertida}:${minutoConvertido} (${fusoPara.selectedOptions[0].text})`;
+  const horaConvertida = String(dataHora.getHours()).padStart(2, "0");
+  const minutoConvertido = String(dataHora.getMinutes()).padStart(2, "0");
+
+  const resultadoTexto =
+    `${dataOrigemBR} ${horaInput} (${fusoDe.selectedOptions[0].text}) → ` +
+    `${dataConvertidaBR} ${horaConvertida}:${minutoConvertido} (${fusoPara.selectedOptions[0].text})`;
 
   resultado.textContent = resultadoTexto;
 
@@ -71,6 +78,10 @@ btnConverter.addEventListener("click", () => {
   historico.prepend(li);
 });
 
+btnLimpar.addEventListener("click", () => {
+  historico.innerHTML = "";
+  resultado.textContent = "";
+});
 btnLimpar.addEventListener("click", () => {
   historico.innerHTML = "";
   resultado.textContent = "";
